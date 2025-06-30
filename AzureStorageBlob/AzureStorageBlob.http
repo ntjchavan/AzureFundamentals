@@ -1,10 +1,29 @@
 @AzureStorageBlob_HostAddress = https://localhost:7036
+@containerName=mycontainer3
 
 GET {{AzureStorageBlob_HostAddress}}/weatherforecast
 
 ###
 
-@containerName=mycontainer
+POST {{AzureStorageBlob_HostAddress}}/api/v1/container/create-container-body
+Content-Type: application/json
+
+"mycontainer3"
+
+###
+
+POST {{AzureStorageBlob_HostAddress}}/api/v1/container/create-container-param?containerName={{containerName}}
+
+###
+
 POST {{AzureStorageBlob_HostAddress}}/api/v1/container/create-container/{{containerName}}
+
+###
+
+GET {{AzureStorageBlob_HostAddress}}/api/v1/container/container-list
+
+###
+
+DELETE {{AzureStorageBlob_HostAddress}}/api/v1/container/delete-container?containerName={{containerName}}
 
 ###

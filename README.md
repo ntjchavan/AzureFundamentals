@@ -11,7 +11,7 @@ Open the Command Palette (Ctrl+Shift+P on windows or Cmd+Shift+P on macOS)
 
 Type - Azurite: Start
 
-You can see that blob server has started on VS Code taskbar
+You can see that blob server has started on VS Code status bar
 http://127.0.0.1:10000
 
 Now, open Az Storage Explorer -> Expand: Emulator & Attached -> Expand: Storage Account -> Expand (Emulator - Default Ports) (Key).
@@ -36,15 +36,3 @@ You will see your Endpoint.
 
 You can add parameters which require for API endpoints & click on Send request (above of API endpoint)
 
-
-https://localhost:7036/api/container/create-container/test1 HTTP/1.1
-
-
-http://localhost:5033/api/Fileupload/createcontainer?containerName=test
-
-https://localhost:7036/api/container/containert?containerName=testnew
-
-POST http://localhost:5148/api/container/create-container/test
-
-https://localhost:7036/api/fileupload/createcontainer?containerName=test 
-http://localhost:7036/api/Fileupload/createcontainer?containerName=test

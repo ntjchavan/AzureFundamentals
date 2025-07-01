@@ -8,9 +8,9 @@ namespace AzureStorageBlob.Controllers
     [ApiController]
     public class ContainerController : ControllerBase
     {
-        private readonly IBlobStorageService _blobStorageService;
+        private readonly IContainerService _blobStorageService;
 
-        public ContainerController(IBlobStorageService blobStorageService)
+        public ContainerController(IContainerService blobStorageService)
         {
             _blobStorageService = blobStorageService;
         }

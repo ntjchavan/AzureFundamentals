@@ -11,7 +11,8 @@ builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.G
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddScoped<IBlobStorageService, BlobStorageService>();
+builder.Services.AddScoped<IContainerService, ContainerService>();
+builder.Services.AddScoped<IBlobService, BlobService>();
 
 var app = builder.Build();
 

@@ -4,7 +4,7 @@ using AzureStorageBlob.Models;
 
 namespace AzureStorageBlob.Services
 {
-    public class BlobStorageService : IBlobStorageService
+    public class ContainerService : IContainerService
     {
         BlobServiceClient _blobServiceClient;
         //public BlobStorageService(IConfiguration configuration)
@@ -14,7 +14,7 @@ namespace AzureStorageBlob.Services
         //}
 
         //To use like below, you need to register connection string in program.cs file.
-        public BlobStorageService(BlobServiceClient blobServiceClient)
+        public ContainerService(BlobServiceClient blobServiceClient)
         {
             _blobServiceClient = blobServiceClient;
         }

@@ -3,7 +3,7 @@ using AzureStorageBlob.Models;
 
 namespace AzureStorageBlob.Services
 {
-    public interface IBlobStorageService
+    public interface IContainerService
     {
         Task<ContainerCreationResult> CreateContainerAsync(string containerName);
         Task<List<string>> GetAllContainerNamesAsync();

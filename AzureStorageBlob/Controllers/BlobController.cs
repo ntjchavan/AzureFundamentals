@@ -27,5 +27,30 @@ namespace AzureStorageBlob.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("blob-list/{containerName}")]
+        public async Task<IActionResult> GetBlobList(string containerName)
+        {
+            var response = await _blobService.GetBlobListAsync(containerName);
+            if (!response.Any())
+            {
+                return NotFound($"No blob found or container '{containerName}' does not exist.");
+            }
+            return Ok(response);
+        }
+
+        [HttpDelete("blob-delete/{containerName}/{blobName}")]
+        public async Task<IActionResult> DeleteBlobAsync(string containerName, string blobName)
+        {
+            var response = await _blobService.DeleteBlobAsync(containerName, blobName);
+            if (response)
+            {
+                return Ok($"Blob {blobName} deleted from container {containerName}.");
+            }
+            return NotFound($"Blob {blobName} not fount in container {containerName}.");
+        }
+
+        // delete multile blobs
+
     }
 }

@@ -41,3 +41,12 @@ POST {{AzureStorageBlob_HostAddress}}/api/blob/upload-blob/{{containerName}}
 //--form 'file=@"file_path"'
 
 ###
+
+GET {{AzureStorageBlob_HostAddress}}/api/blob/blob-list/{{containerName}}
+
+###
+
+@blobName=BlobUploadTest.jpg
+DELETE {{AzureStorageBlob_HostAddress}}/api/blob/blob-delete/{{containerName}}/{{blobName}}
+
+###

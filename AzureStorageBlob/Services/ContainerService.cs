@@ -33,7 +33,7 @@ namespace AzureStorageBlob.Services
             {
                 ContainerName = containerName,
                 IsNewlyCreated = result != null,
-                Message = result != null ? $"Container {containerName} created successfully" : $"Container already exists."
+                Message = result != null ? $"Container {containerName} created successfully" : $"Container {containerName} already exists."
             };
             return response;
         }

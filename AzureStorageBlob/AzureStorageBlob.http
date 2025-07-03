@@ -42,11 +42,27 @@ POST {{AzureStorageBlob_HostAddress}}/api/blob/upload-blob/{{containerName}}
 
 ###
 
+@blobName=img1.jpeg
 GET {{AzureStorageBlob_HostAddress}}/api/blob/blob-list/{{containerName}}
 
 ###
 
-@blobName=BlobUploadTest.jpg
+GET {{AzureStorageBlob_HostAddress}}/api/blob/get-blob/{{containerName}}/{{blobName}}
+
+###
+
 DELETE {{AzureStorageBlob_HostAddress}}/api/blob/blob-delete/{{containerName}}/{{blobName}}
+
+###
+
+DELETE {{AzureStorageBlob_HostAddress}}/api/blob/delete-multiple-blobs/{{containerName}}
+Content-Type: application/json
+[
+  "133821007122555688_2.jpg",
+  "BlobUploadTest.jpg"
+]
+###
+
+GET {{AzureStorageBlob_HostAddress}}/api/blob/download/{{containerName}}/{{blobName}}
 
 ###

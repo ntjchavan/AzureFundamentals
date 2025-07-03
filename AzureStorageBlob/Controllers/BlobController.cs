@@ -39,6 +39,31 @@ namespace AzureStorageBlob.Controllers
             return Ok(response);
         }
 
+        [HttpGet("get-blob/{containerName}/{blobName}")]
+        public async Task<IActionResult> GetBlobDetails(string containerName, string blobName)
+        {
+            var response = await _blobService.GetBlobDetailsAsync(containerName, blobName);
+
+            if (string.IsNullOrEmpty(response.Uri))
+            {
+                return NotFound($"Blob '{blobName}' not found in container '{containerName}'");
+            }
+            return Ok(response);
+        }
+
+        [HttpGet("download/{containerName}/{blobName}")]
+        public async Task<IActionResult> DownloadBlob(string containerName, string blobName)
+        {
+            var (stream, contentType, flag) = await _blobService.DownloadBlobAsync(containerName, blobName);
+
+            if(!flag)
+            {
+                return NotFound($"Blob {blobName} not found in container {containerName}");
+            }
+
+            return File(stream, "image/jpeg", blobName);
+        }
+
         [HttpDelete("blob-delete/{containerName}/{blobName}")]
         public async Task<IActionResult> DeleteBlobAsync(string containerName, string blobName)
         {
@@ -48,6 +73,15 @@ namespace AzureStorageBlob.Controllers
                 return Ok($"Blob {blobName} deleted from container {containerName}.");
             }
             return NotFound($"Blob {blobName} not fount in container {containerName}.");
+        }
+
+        [HttpDelete("delete-multiple-blobs/{containerName}")]
+        public async Task<IActionResult> DeleteMultipleBlobsAsync(string containerName, [FromBody] List<string> blobNames)
+        {
+            var response = await _blobService.DeleteBlobsAsync(containerName, blobNames);
+
+            var blobs = new { Deleted = response, Message = $"Deleted {response.Count} blobs from your container {containerName}" };
+            return Ok(blobs);
         }
 
         // delete multile blobs

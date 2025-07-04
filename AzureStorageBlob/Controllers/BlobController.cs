@@ -1,4 +1,5 @@
-﻿using AzureStorageBlob.Services;
+﻿using AzureStorageBlob.Models;
+using AzureStorageBlob.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,18 @@ namespace AzureStorageBlob.Controllers
             var response = await _blobService.UploadBlobAsync(containerName, file);
 
             return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("upload-blob-tier/{containerName}")]
+        public async Task<IActionResult> UploadBlobWithTier(string containerName, [FromForm] BlobUploadRequest uploadRequest)
+        {
+            if (uploadRequest.File == null || uploadRequest.File.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+            var response = await _blobService.UploadBlobWithTierAsync(containerName, uploadRequest);
+            return Ok(new { Message = "Blob uploaded successfully", BlobUrl = response });
         }
 
         [HttpGet("blob-list/{containerName}")]
@@ -56,7 +69,7 @@ namespace AzureStorageBlob.Controllers
         {
             var (stream, contentType, flag) = await _blobService.DownloadBlobAsync(containerName, blobName);
 
-            if(!flag)
+            if (!flag)
             {
                 return NotFound($"Blob {blobName} not found in container {containerName}");
             }

@@ -26,6 +26,41 @@ namespace AzureStorageBlob.Services
             return blobClient.Uri.ToString();
         }
 
+        public async Task<string> UploadBlobWithTierAsync(string containerName, BlobUploadRequest uploadRequest)
+        {
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+            var blobName = uploadRequest.File.FileName;
+
+            using var stream = uploadRequest.File.OpenReadStream();
+
+            var accessTier = uploadRequest.AccessTier.ToLower() switch
+            {
+                "cool" => AccessTier.Cool,
+                "cold" => AccessTier.Cold,
+                "archive" => AccessTier.Archive,
+                _ => AccessTier.Hot
+            };
+
+            switch(uploadRequest.BlobType.ToLower())
+            {
+                case "append":
+                    break;
+
+                default:
+                    BlobClient blobClient = containerClient.GetBlobClient(blobName);
+                    await blobClient.UploadAsync(stream, new BlobUploadOptions
+                    {
+                        AccessTier = accessTier,
+                        HttpHeaders = new BlobHttpHeaders
+                        {
+                            ContentType = uploadRequest.File.ContentType
+                        }
+                    });
+                    return blobClient.Uri.ToString();
+            }
+            return blobName;
+        }
+
         public async Task<BlobDetails> GetBlobDetailsAsync(string containerName, string blobName)
         {
             BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);

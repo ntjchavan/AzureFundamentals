@@ -34,7 +34,9 @@ GET {{AzureStorageBlob_HostAddress}}/api/v1/container/container-list
 ### Blob operations
 
 POST {{AzureStorageBlob_HostAddress}}/api/blob/upload-blob/{{containerName}}
-  -F "file=@C:/Users/Shree/Downloads/BlobUploadTest.jpg"
+Content-Type: multipart/form-data
+
+-F "file=@C:/Users/Shree/Downloads/BlobUploadTest.jpg"
 
 ### postman curl
 //curl --location 'https://localhost:7036/api/blob/upload-blob/mycontainer' \
@@ -64,5 +66,13 @@ Content-Type: application/json
 ###
 
 GET {{AzureStorageBlob_HostAddress}}/api/blob/download/{{containerName}}/{{blobName}}
+
+###
+
+POST {{AzureStorageBlob_HostAddress}}/api/blob/upload-blob-tier/{{containerName}}
+
+# curl --location 'https://localhost:7036/api/blob/upload-blob-tier/mycontainer' \
+# --form 'File=@"choose file' \
+# --form 'AccessTier="cool"'
 
 ###

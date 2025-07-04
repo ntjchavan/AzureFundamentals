@@ -5,6 +5,7 @@ namespace AzureStorageBlob.Services
     public interface IBlobService
     {
         Task<string> UploadBlobAsync(string containerName, IFormFile file);
+        Task<string> UploadBlobWithTierAsync(string containerName, BlobUploadRequest uploadRequest);
         Task<BlobDetails> GetBlobDetailsAsync(string containerName, string blobName);
         Task<List<string>> GetBlobListAsync(string containerName);
         Task<(Stream Content, string ContentType, bool IsBlobAvailable)> DownloadBlobAsync(string containerName, string blobName);

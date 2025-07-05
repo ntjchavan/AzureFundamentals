@@ -41,6 +41,14 @@ namespace AzureStorageBlob.Controllers
             return Ok(new { Message = "Blob uploaded successfully", BlobUrl = response });
         }
 
+        [HttpPost("upload-blob-metadata")]
+        public async Task<IActionResult> UploadBlobWithMetadata([FromForm] BlobUploadMetadataRequest blobUpload)
+        {
+            var response = await _blobService.UploadBlobWithMetadataAsync(blobUpload);
+
+            return Ok(response);
+        }
+
         [HttpGet("blob-list/{containerName}")]
         public async Task<IActionResult> GetBlobList(string containerName)
         {
@@ -62,6 +70,18 @@ namespace AzureStorageBlob.Controllers
                 return NotFound($"Blob '{blobName}' not found in container '{containerName}'");
             }
             return Ok(response);
+        }
+
+        [HttpGet("get-blob-metadata/{containerName}")]
+        public async Task<IActionResult> GetBlobMetadata(string containerName, [FromQuery] string blobName)
+        {
+            var response = await _blobService.GetBlobWithMetadataAsync(containerName, blobName);
+
+            return Ok(new
+            {
+                BlobName = response.Item1,
+                Metadata = response.Item2
+            });
         }
 
         [HttpGet("download/{containerName}/{blobName}")]

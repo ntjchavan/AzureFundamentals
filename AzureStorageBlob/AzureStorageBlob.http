@@ -44,12 +44,16 @@ Content-Type: multipart/form-data
 
 ###
 
-@blobName=img1.jpeg
+@blobName=ID Card Photo.jpg
 GET {{AzureStorageBlob_HostAddress}}/api/blob/blob-list/{{containerName}}
 
 ###
 
 GET {{AzureStorageBlob_HostAddress}}/api/blob/get-blob/{{containerName}}/{{blobName}}
+
+###
+
+GET {{AzureStorageBlob_HostAddress}}/api/blob/get-blob-metadata/{{containerName}}?blobName={{blobName}}
 
 ###
 
@@ -74,5 +78,20 @@ POST {{AzureStorageBlob_HostAddress}}/api/blob/upload-blob-tier/{{containerName}
 # curl --location 'https://localhost:7036/api/blob/upload-blob-tier/mycontainer' \
 # --form 'File=@"choose file' \
 # --form 'AccessTier="cool"'
+
+###
+
+POST {{AzureStorageBlob_HostAddress}}/api/blob/upload-blob-metadata
+Content-Type: application/json
+
+{
+  //BlobUploadMetadataRequest
+}
+
+# curl --location 'https://localhost:7036/api/blob/upload-blob-metadata' \
+# --form 'File=@"/C:/Users/Shree/OneDrive/Pictures/133821007122555688_2.jpg"' \
+# --form 'ContainerName="mycontainer"' \
+# --form 'MetaData[author]="Netaji"'
+
 
 ###

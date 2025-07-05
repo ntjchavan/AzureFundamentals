@@ -29,9 +29,9 @@ namespace AzureStorageBlob.Services
         public async Task<string> UploadBlobWithTierAsync(string containerName, BlobUploadRequest uploadRequest)
         {
             BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
-            var blobName = uploadRequest.File.FileName;
+            var blobName = uploadRequest.File?.FileName;
 
-            using var stream = uploadRequest.File.OpenReadStream();
+            using var stream = uploadRequest.File?.OpenReadStream();
 
             var accessTier = uploadRequest.AccessTier.ToLower() switch
             {
@@ -41,7 +41,7 @@ namespace AzureStorageBlob.Services
                 _ => AccessTier.Hot
             };
 
-            switch(uploadRequest.BlobType.ToLower())
+            switch (uploadRequest.BlobType.ToLower())
             {
                 case "append":
                     break;
@@ -59,6 +59,31 @@ namespace AzureStorageBlob.Services
                     return blobClient.Uri.ToString();
             }
             return blobName;
+        }
+
+        public async Task<string> UploadBlobWithMetadataAsync(BlobUploadMetadataRequest request)
+        {
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(request.ContainerName);
+
+            if(!await containerClient.ExistsAsync())
+            {
+                return string.Empty;
+            }
+
+            BlobUploadOptions uploadOptions = new BlobUploadOptions
+            {
+                Metadata = request.MetaData,
+                HttpHeaders = new BlobHttpHeaders
+                {
+                    ContentType = request.File?.ContentType
+                }
+            };
+
+            BlobClient blobName = containerClient.GetBlobClient(request.File?.FileName);
+            using var stream = request.File?.OpenReadStream();
+            await blobName.UploadAsync(stream, uploadOptions);
+
+            return blobName.Uri.ToString();
         }
 
         public async Task<BlobDetails> GetBlobDetailsAsync(string containerName, string blobName)
@@ -112,6 +137,21 @@ namespace AzureStorageBlob.Services
             var result = await blobClient.DownloadStreamingAsync();
             //var data = (result.Value.Content, result.Value.Details.ContentType);
             return (result.Value.Content, result.Value.Details.ContentType, true);
+        }
+
+        public async Task<(string, IDictionary<string, string>)> GetBlobWithMetadataAsync(string containerName, string blobName)
+        {
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+            BlobClient blobClient = containerClient.GetBlobClient(blobName);
+
+            if (!await blobClient.ExistsAsync())
+            {
+                return (string.Empty, new Dictionary<string, string>());
+            }
+            var properties = await blobClient.GetPropertiesAsync();
+            var metadata = properties.Value.Metadata;
+
+            return (blobClient.Uri.ToString(), metadata);
         }
 
         public async Task<bool> DeleteBlobAsync(string containerName, string blobName)

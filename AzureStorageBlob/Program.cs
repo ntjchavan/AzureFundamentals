@@ -1,6 +1,6 @@
 using Azure.Storage.Blobs;
+using AzureStorageBlob.Middleware;
 using AzureStorageBlob.Services;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +13,13 @@ builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.G
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<IContainerService, ContainerService>();
 builder.Services.AddScoped<IBlobService, BlobService>();
+
+builder.Services.AddScoped<ExceptionHandlingFilter>(); //Register with DI
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ExceptionHandlingFilter>(); //Apply globally
+});
+//if exception has handled at this step then custom middleware exception will not execute.
 
 var app = builder.Build();
 
@@ -49,6 +56,7 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.MapControllers();
 
 app.Run();

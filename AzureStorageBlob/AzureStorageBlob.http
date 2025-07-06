@@ -33,27 +33,27 @@ GET {{AzureStorageBlob_HostAddress}}/api/v1/container/container-list
 
 ### Blob operations
 
-POST {{AzureStorageBlob_HostAddress}}/api/blob/upload-blob/{{containerName}}
+POST {{AzureStorageBlob_HostAddress}}/blob/upload-blob/{{containerName}}
 Content-Type: multipart/form-data
 
 -F "file=@C:/Users/Shree/Downloads/BlobUploadTest.jpg"
 
 ### postman curl
-//curl --location 'https://localhost:7036/api/blob/upload-blob/mycontainer' \
+//curl --location 'https://localhost:7036/blob/upload-blob/mycontainer' \
 //--form 'file=@"file_path"'
 
 ###
 
-@blobName=ID Card Photo.jpg
-GET {{AzureStorageBlob_HostAddress}}/api/blob/blob-list/{{containerName}}
+@blobName=ID Card Photo11.jpg
+GET {{AzureStorageBlob_HostAddress}}/blob/blob-list/{{containerName}}
 
 ###
 
-GET {{AzureStorageBlob_HostAddress}}/api/blob/get-blob/{{containerName}}/{{blobName}}
+GET {{AzureStorageBlob_HostAddress}}/blob/get-blob/{{containerName}}/{{blobName}}
 
 ###
 
-GET {{AzureStorageBlob_HostAddress}}/api/blob/get-blob-metadata/{{containerName}}?blobName={{blobName}}
+GET {{AzureStorageBlob_HostAddress}}/blob/get-blob-metadata/{{containerName}}?blobName={{blobName}}
 
 ###
 
@@ -61,7 +61,7 @@ DELETE {{AzureStorageBlob_HostAddress}}/api/blob/blob-delete/{{containerName}}/{
 
 ###
 
-DELETE {{AzureStorageBlob_HostAddress}}/api/blob/delete-multiple-blobs/{{containerName}}
+DELETE {{AzureStorageBlob_HostAddress}}/blob/delete-multiple-blobs/{{containerName}}
 Content-Type: application/json
 [
   "133821007122555688_2.jpg",
@@ -69,26 +69,26 @@ Content-Type: application/json
 ]
 ###
 
-GET {{AzureStorageBlob_HostAddress}}/api/blob/download/{{containerName}}/{{blobName}}
+GET {{AzureStorageBlob_HostAddress}}/blob/download/{{containerName}}/{{blobName}}
 
 ###
 
-POST {{AzureStorageBlob_HostAddress}}/api/blob/upload-blob-tier/{{containerName}}
+POST {{AzureStorageBlob_HostAddress}}/blob/upload-blob-tier/{{containerName}}
 
-# curl --location 'https://localhost:7036/api/blob/upload-blob-tier/mycontainer' \
+# curl --location 'https://localhost:7036/blob/upload-blob-tier/mycontainer' \
 # --form 'File=@"choose file' \
 # --form 'AccessTier="cool"'
 
 ###
 
-POST {{AzureStorageBlob_HostAddress}}/api/blob/upload-blob-metadata
+POST {{AzureStorageBlob_HostAddress}}/blob/upload-blob-metadata
 Content-Type: application/json
 
 {
   //BlobUploadMetadataRequest
 }
 
-# curl --location 'https://localhost:7036/api/blob/upload-blob-metadata' \
+# curl --location 'https://localhost:7036/blob/upload-blob-metadata' \
 # --form 'File=@"/C:/Users/Shree/OneDrive/Pictures/133821007122555688_2.jpg"' \
 # --form 'ContainerName="mycontainer"' \
 # --form 'MetaData[author]="Netaji"'

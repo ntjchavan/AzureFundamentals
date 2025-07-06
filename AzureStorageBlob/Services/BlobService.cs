@@ -29,7 +29,7 @@ namespace AzureStorageBlob.Services
         public async Task<string> UploadBlobWithTierAsync(string containerName, BlobUploadRequest uploadRequest)
         {
             BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
-            var blobName = uploadRequest.File?.FileName;
+            var blobName = uploadRequest.File?.FileName!;
 
             using var stream = uploadRequest.File?.OpenReadStream();
 
@@ -53,7 +53,7 @@ namespace AzureStorageBlob.Services
                         AccessTier = accessTier,
                         HttpHeaders = new BlobHttpHeaders
                         {
-                            ContentType = uploadRequest.File.ContentType
+                            ContentType = uploadRequest.File?.ContentType
                         }
                     });
                     return blobClient.Uri.ToString();

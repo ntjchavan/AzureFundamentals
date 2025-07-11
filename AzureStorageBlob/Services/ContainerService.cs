@@ -58,6 +58,18 @@ namespace AzureStorageBlob.Services
             return result;
         }
 
+        public async Task<bool> SetContainerAccessLevelAsync(string containerName, PublicAccessType accessType)
+        {
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+
+            if (!await containerClient.ExistsAsync())
+            {
+                return false;
+            }
+
+            await containerClient.SetAccessPolicyAsync(accessType);
+            return true;
+        }
     }
 
 }

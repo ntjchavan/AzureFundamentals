@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Add services to the container.
-builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.GetSection("AzureConnection")["BlobStorageConnection"]));
+builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.GetSection("AzureBlobStorage")["BlobStorageConnection"]));
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

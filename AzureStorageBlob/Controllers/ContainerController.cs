@@ -1,10 +1,11 @@
-﻿using AzureStorageBlob.Services;
+﻿using Azure.Storage.Blobs.Models;
+using AzureStorageBlob.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AzureStorageBlob.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ContainerController : ControllerBase
     {
@@ -45,7 +46,7 @@ namespace AzureStorageBlob.Controllers
 
         [HttpPost]
         [Route("create-container-body")]
-        public async Task<IActionResult> CreateContainerBody([FromBody]string containerName)
+        public async Task<IActionResult> CreateContainerBody([FromBody] string containerName)
         {
             var response = await _blobStorageService.CreateContainerAsync(containerName);
 
@@ -72,6 +73,17 @@ namespace AzureStorageBlob.Controllers
             var respone = await _blobStorageService.DeleteContainerAsync(containerName);
 
             return Ok(respone);
+        }
+
+        [HttpPost("update-access")]
+        public async Task<IActionResult> UpdateContaienerAccess(string containerName, string accessLevel)
+        {
+            if (!Enum.TryParse<PublicAccessType>(accessLevel, true, out var parsedAccess))
+            {
+                return BadRequest("Invalid access level. Use: None, Blob or BlobContainer");
+            }
+            var response = await _blobStorageService.SetContainerAccessLevelAsync(containerName, parsedAccess);
+            return Ok(response);
         }
 
     }

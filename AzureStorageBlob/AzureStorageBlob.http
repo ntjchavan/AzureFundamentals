@@ -39,7 +39,7 @@ Content-Type: multipart/form-data
 -F "file=@C:/Users/Shree/Downloads/BlobUploadTest.jpg"
 
 ### postman curl
-//curl --location 'https://localhost:7036/blob/upload-blob/mycontainer' \
+//curl --location 'https://localhost:7036/blob/upload-blob/my-container' \
 //--form 'file=@"file_path"'
 
 ###

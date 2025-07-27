@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureStorageBlob", "AzureSt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureStorageBlob", "AzureStorageBlob", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureFunctions", "AzureFunctions", "{BE7BB6D6-D59A-4E34-A1F6-5B5872E96CEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp", "FunctionApp\FunctionApp.csproj", "{E1543F7E-98E1-4F0C-A274-394B2E21E41C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApplication", "WebApplication", "{A477AF66-B6CC-42AD-A748-9021E5EA420C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCWebApplication", "MVCWebApplication\MVCWebApplication.csproj", "{05C436CB-7141-4C04-A118-CCF91233EFCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +25,22 @@ Global
 		{387A5DB9-342F-498B-A255-AD46CEA3A52A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{387A5DB9-342F-498B-A255-AD46CEA3A52A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{387A5DB9-342F-498B-A255-AD46CEA3A52A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1543F7E-98E1-4F0C-A274-394B2E21E41C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1543F7E-98E1-4F0C-A274-394B2E21E41C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1543F7E-98E1-4F0C-A274-394B2E21E41C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1543F7E-98E1-4F0C-A274-394B2E21E41C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C436CB-7141-4C04-A118-CCF91233EFCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C436CB-7141-4C04-A118-CCF91233EFCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C436CB-7141-4C04-A118-CCF91233EFCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C436CB-7141-4C04-A118-CCF91233EFCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{387A5DB9-342F-498B-A255-AD46CEA3A52A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{E1543F7E-98E1-4F0C-A274-394B2E21E41C} = {BE7BB6D6-D59A-4E34-A1F6-5B5872E96CEE}
+		{05C436CB-7141-4C04-A118-CCF91233EFCA} = {A477AF66-B6CC-42AD-A748-9021E5EA420C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E2F9B71-3054-41B3-A9A2-0597F482A438}

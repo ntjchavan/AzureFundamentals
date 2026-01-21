@@ -1,0 +1,9 @@
+// Get Hello world
+
+curl --location 'http://localhost:7015/api/get-hello-world?message=good%20morning'
+
+// Post Hello world
+
+curl --location 'http://localhost:7015/api/post-hello-world' \ --header 'Content-Type: application/json' \ --data '{ "message": "Good morning" }'
+
+// 

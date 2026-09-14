@@ -7,7 +7,7 @@ namespace ServiceBus
 {
     public class ServiceBus2
     {
-        static string connectionString = "Endpoint=sb://first-queue-demo.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=VXTHZD2VxWdOxqMHnfwgKNDo7oC2PkNeb+ASbC7WX+A=";
+        static string connectionString = "";
         static string queue = "orders-queue";
         public static async Task SendMessage()
         {

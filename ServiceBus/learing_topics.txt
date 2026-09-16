@@ -1,0 +1,18 @@
+Week 1
+Service Bus fundamentals, Queue, Topic, Subscription, message lifecycle
+Day 1: What is Azure Service Bus?
+Day 2: Messaging Fundamentals
+Day 3: Azure Service Bus Queues
+Day 4: Topics & Subscriptions
+Day 5: Message Lifecycle
+Day 6: Peek-Lock & Receive Modes
+Day 7: Interview Questions + Scenario-Based Questions
+
+Week 2	
+PeekLock, retries, DLQ, sessions, filters, scheduling, duplicate detection
+
+Week 3	
+.NET implementation, Worker Service, DI, security, Managed Identity, monitoring
+
+Week 4	
+Performance, transactions, architecture, troubleshooting + interview questions

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.9.12120.119 stable
+VisualStudioVersion = 18.9.12120.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureStorageBlob", "AzureStorageBlob\AzureStorageBlob.csproj", "{387A5DB9-342F-498B-A255-AD46CEA3A52A}"
 EndProject
@@ -22,6 +22,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceBus", "ServiceBus", "{A032F0E1-1FEF-43E3-B091-83CA10A0599D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBus", "ServiceBus\ServiceBus.csproj", "{D7F16FBF-5E05-4049-BE72-9B7B43C6E0E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBusMessaging", "ServiceBusProducer\ServiceBusMessaging.csproj", "{0E33BCAD-A7F5-4DF7-B7D0-9DC6AC0A36CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderProcessor.Worker", "OrderProcessor.Worker\OrderProcessor.Worker.csproj", "{B54D5DC9-FF71-442B-82CD-40A265854581}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,14 @@ Global
 		{D7F16FBF-5E05-4049-BE72-9B7B43C6E0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7F16FBF-5E05-4049-BE72-9B7B43C6E0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7F16FBF-5E05-4049-BE72-9B7B43C6E0E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E33BCAD-A7F5-4DF7-B7D0-9DC6AC0A36CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E33BCAD-A7F5-4DF7-B7D0-9DC6AC0A36CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E33BCAD-A7F5-4DF7-B7D0-9DC6AC0A36CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E33BCAD-A7F5-4DF7-B7D0-9DC6AC0A36CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B54D5DC9-FF71-442B-82CD-40A265854581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B54D5DC9-FF71-442B-82CD-40A265854581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B54D5DC9-FF71-442B-82CD-40A265854581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B54D5DC9-FF71-442B-82CD-40A265854581}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +71,8 @@ Global
 		{177515D6-E67A-42E7-AC8E-32670EDFDA5E} = {F915D7D3-2DB4-4F23-B700-D1760E5AD21B}
 		{C0260137-1262-46AB-91A5-C4AC6312D55F} = {1F9CEBF6-4C10-4552-AF31-EF14B6690364}
 		{D7F16FBF-5E05-4049-BE72-9B7B43C6E0E6} = {A032F0E1-1FEF-43E3-B091-83CA10A0599D}
+		{0E33BCAD-A7F5-4DF7-B7D0-9DC6AC0A36CA} = {A032F0E1-1FEF-43E3-B091-83CA10A0599D}
+		{B54D5DC9-FF71-442B-82CD-40A265854581} = {A032F0E1-1FEF-43E3-B091-83CA10A0599D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E2F9B71-3054-41B3-A9A2-0597F482A438}

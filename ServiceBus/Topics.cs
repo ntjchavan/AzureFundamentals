@@ -9,6 +9,7 @@ namespace ServiceBus
     {
         static string connectionString = "";
         static string topicName = "orders-topic";
+        static string subscriptionName = "notification-sub";
 
         public static async Task SendMessage()
         {
@@ -45,7 +46,7 @@ namespace ServiceBus
             await using var client = new ServiceBusClient(connectionString);
 
             // Create a service bus receiver for the subscription
-            ServiceBusReceiver receiver = client.CreateReceiver(topicName, "notification-sub");
+            ServiceBusReceiver receiver = client.CreateReceiver(topicName, subscriptionName);
 
             // Receive a message from the subscription
             ServiceBusReceivedMessage message = await receiver.ReceiveMessageAsync();
@@ -63,23 +64,39 @@ namespace ServiceBus
 
         }
 
-        public static async Task ReceiveMessage1()
+        public static async Task ProcessMessage()
         {
-            // Create a service bus client
             await using var client = new ServiceBusClient(connectionString);
-            // Create a service bus receiver for the subscription
-            ServiceBusReceiver receiver = client.CreateReceiver(topicName, "orders-subscription");
-            // Receive a message from the subscription
-            ServiceBusReceivedMessage message = await receiver.ReceiveMessageAsync();
-            if (message != null)
+
+            var options = new ServiceBusProcessorOptions
             {
-                Console.WriteLine($"Received Message: {message.Body}");
-                await receiver.CompleteMessageAsync(message); // complete the message after processing
-            }
-            else
+                MaxConcurrentCalls = 1, // Set the maximum number of concurrent calls to process messages
+                AutoCompleteMessages = false, // Set to false to manually complete messages after processing
+                ReceiveMode = ServiceBusReceiveMode.PeekLock, // Set the receive mode to PeekLock / ReceiveAndDelete
+                MaxAutoLockRenewalDuration = TimeSpan.FromMinutes(5) // Set the maximum duration for auto lock renewal
+            };
+
+            // var processor = client.CreateProcessor(topicName, subscriptionName, new ServiceBusProcessorOptions { ReceiveMode = ServiceBusReceiveMode.PeekLock });
+            var processor = client.CreateProcessor(topicName, subscriptionName, options);
+
+            processor.ProcessMessageAsync += async (args) =>
             {
-                Console.WriteLine("No messages available in the subscription.");
-            }
+                try
+                {
+                    var message = args.Message;
+
+                    string body = message.Body.ToString();
+
+                    // process the message here below completing the message
+
+                    await args.CompleteMessageAsync(message);
+                }
+                catch (Exception ex)
+                {
+                    await args.AbandonMessageAsync(args.Message);
+                    Console.WriteLine("Failed to process message", ex.ToString());
+                }
+            };
         }
     }
 }

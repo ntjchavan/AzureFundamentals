@@ -16,3 +16,7 @@ Week 3
 
 Week 4	
 Performance, transactions, architecture, troubleshooting + interview questions
+
+Azure Service Bus Week 3, as you know that I am learning service bus and week 2 completed. 
+You can check previous chat. Week 3 sections: .NET implementation, Worker Service, DI, security, Managed Identity, monitoring. 
+could you please start the week 3 sections?
